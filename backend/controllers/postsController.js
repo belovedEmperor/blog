@@ -9,14 +9,18 @@ async function isUserOwner(req, res) {
 }
 
 export async function getAll(req, res) {
-  const posts = await prisma.post.findMany();
+  const posts = await prisma.post.findMany({ where: { isPublished: true } });
   return res.json(posts);
 }
 
 export async function getOne(req, res) {
-  const post = await prisma.post.findUnique({
-    where: { id: Number(req.params.id) },
-  });
+  const where = req.user
+    ? {
+        id: Number(req.params.id),
+        OR: [{ isPublished: true }, { userId: req.user.id }],
+      }
+    : { id: Number(req.params.id), isPublished: true };
+  const post = await prisma.post.findUnique({ where });
   return res.json(post);
 }
 
@@ -26,6 +30,7 @@ export async function create(req, res) {
       title: req.body.title,
       body: req.body.body,
       userId: req.user.id,
+      isPublished: req.body.isPublished ?? false,
     },
   });
   res.json("Post created");
@@ -39,6 +44,7 @@ export async function update(req, res) {
     data: {
       title: req.body.title,
       body: req.body.body,
+      isPublished: req.body.isPublished,
     },
   });
   res.json("Post updated");
