@@ -8,7 +8,16 @@ export async function getAll(req, res) {
 export async function getOne(req, res) {
   const user = await prisma.user.findUnique({
     where: { id: Number(req.params.id) },
-    omit: { password: true },
+    omit: { password: true, email: true },
+  });
+  return res.json(user);
+}
+
+export async function getPosts(req, res) {
+  const user = await prisma.user.findUnique({
+    where: { id: Number(req.params.id) },
+    include: { posts: true },
+    omit: { password: true, email: true },
   });
   return res.json(user);
 }
