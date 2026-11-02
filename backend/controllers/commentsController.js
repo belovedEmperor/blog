@@ -38,11 +38,11 @@ export async function update(req, res) {
     return res
       .status(403)
       .json("User is not authorized to modify this comment.");
+  const data = {};
+  if (req.body.body !== undefined) data.body = req.body.body;
   await prisma.comment.update({
     where: { id: Number(req.params.id), postId: Number(req.params.postId) },
-    data: {
-      body: req.body.body,
-    },
+    data,
   });
   res.json("comment updated");
 }

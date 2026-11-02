@@ -39,13 +39,14 @@ export async function create(req, res) {
 export async function update(req, res) {
   if (!(await isUserOwner(req, res)))
     return res.status(403).json("User is not authorized to modify this post.");
+  const data = {};
+  if (req.body.title !== undefined) data.title = req.body.title;
+  if (req.body.body !== undefined) data.body = req.body.body;
+  if (req.body.isPublished !== undefined)
+    data.isPublished = req.body.isPublished;
   await prisma.post.update({
     where: { id: Number(req.params.id) },
-    data: {
-      title: req.body.title,
-      body: req.body.body,
-      isPublished: req.body.isPublished,
-    },
+    data,
   });
   res.json("Post updated");
 }

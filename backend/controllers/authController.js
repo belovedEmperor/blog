@@ -47,14 +47,14 @@ export async function get(req, res) {
 }
 
 export async function update(req, res) {
-  const hashedPassword = await bcrypt.hash(req.body.password, 10);
+  const data = {};
+  if (req.body.email !== undefined) data.email = req.body.email.toLowerCase();
+  if (req.body.username !== undefined) data.username = req.body.username;
+  if (req.body.password !== undefined)
+    data.password = await bcrypt.hash(req.body.password, 10);
   await prisma.user.update({
-    where: { id: Number(req.user.id) },
-    data: {
-      email: req.body.email.toLowerCase(),
-      username: req.body.username,
-      password: hashedPassword,
-    },
+    where: { id: req.user.id },
+    data,
   });
   res.json("User updated");
 }
