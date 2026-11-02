@@ -30,23 +30,6 @@ export type Post = $Result.DefaultSelection<Prisma.$PostPayload>
 export type Comment = $Result.DefaultSelection<Prisma.$CommentPayload>
 
 /**
- * Enums
- */
-export namespace $Enums {
-  export const Role: {
-  User: 'User',
-  Admin: 'Admin'
-};
-
-export type Role = (typeof Role)[keyof typeof Role]
-
-}
-
-export type Role = $Enums.Role
-
-export const Role: typeof $Enums.Role
-
-/**
  * ##  Prisma Client ʲˢ
  *
  * Type-safe database client for TypeScript & Node.js
