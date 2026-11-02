@@ -28,7 +28,7 @@ model Post {
   body        String
   isPublished Boolean  @default(false)
   createdAt   DateTime @default(now())
-  modifiedAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
 
   author User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
@@ -40,7 +40,7 @@ model Comment {
   id         Int      @id @default(autoincrement())
   body       String
   createdAt  DateTime @default(now())
-  modifiedAt DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
 
   post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId Int
