@@ -6,13 +6,14 @@ import {
   update,
   remove,
 } from "../../controllers/commentsController.js";
+import passport from "passport";
 
 const router = Router({ mergeParams: true });
 
 router.get("/", getAll);
 router.get("/:id", getOne);
-router.post("/", create);
-router.patch("/:id", update);
-router.delete("/:id", remove);
+router.post("/", passport.authenticate("jwt", { session: false }), create);
+router.patch("/:id", passport.authenticate("jwt", { session: false }), update);
+router.delete("/:id", passport.authenticate("jwt", { session: false }), remove);
 
 export default router;

@@ -12,6 +12,11 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Role {
+  User
+  Admin
+}
+
 model User {
   id       Int    @id @default(autoincrement())
   username String @unique
@@ -28,7 +33,7 @@ model Post {
   body        String
   isPublished Boolean  @default(false)
   createdAt   DateTime @default(now())
-  updatedAt  DateTime @default(now()) @updatedAt
+  updatedAt   DateTime @default(now()) @updatedAt
 
   author User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
@@ -37,10 +42,10 @@ model Post {
 }
 
 model Comment {
-  id         Int      @id @default(autoincrement())
-  body       String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @default(now()) @updatedAt
+  id        Int      @id @default(autoincrement())
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 
   post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId Int

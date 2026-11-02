@@ -7,14 +7,15 @@ import {
   remove,
 } from "../../controllers/postsController.js";
 import commentsRouter from "./commentsRouter.js";
+import passport from "passport";
 
 const router = Router();
 
 router.get("/", getAll);
 router.get("/:id", getOne);
-router.post("/", create);
-router.patch("/:id", update);
-router.delete("/:id", remove);
+router.post("/", passport.authenticate("jwt", { session: false }), create);
+router.patch("/:id", passport.authenticate("jwt", { session: false }), update);
+router.delete("/:id", passport.authenticate("jwt", { session: false }), remove);
 
 router.use("/:postId/comments", commentsRouter);
 
