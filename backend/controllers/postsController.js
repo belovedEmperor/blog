@@ -19,7 +19,7 @@ export async function create(req, res) {
       body: req.body.body,
       // TODO: Add user id by jwt when jwt is implemented
       // userId: req.user.id,
-      userId: req.body.userId,
+      userId: Number(req.body.userId),
     },
   });
   res.json("Post created");
