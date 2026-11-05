@@ -1,19 +1,26 @@
 import { useEffect, useState } from "react";
+import PostCard from "./components/PostCard";
 
 function App() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:3000/api/v1/posts")
+    fetch(import.meta.env.VITE_API_URL + "posts")
       .then((response) => response.json())
       .then((data) => setPosts(data));
   }, []);
 
   console.log(posts);
 
+  const postCards = posts.map((post) => (
+    <li key={post.id}>
+      <PostCard post={post} />
+    </li>
+  ));
+
   return (
     <>
-      <p>{posts}</p>
+      <ul>{postCards}</ul>
     </>
   );
 }
