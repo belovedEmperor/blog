@@ -9,7 +9,10 @@ async function isUserOwner(req, res) {
 }
 
 export async function getAll(req, res) {
-  const posts = await prisma.post.findMany({ where: { isPublished: true } });
+  const posts = await prisma.post.findMany({
+    where: { isPublished: true },
+    include: { author: { select: { username: true } } },
+  });
   return res.json(posts);
 }
 
@@ -20,7 +23,10 @@ export async function getOne(req, res) {
         OR: [{ isPublished: true }, { userId: req.user.id }],
       }
     : { id: Number(req.params.id), isPublished: true };
-  const post = await prisma.post.findUnique({ where });
+  const post = await prisma.post.findUnique({
+    where,
+    include: { author: { select: { username: true } } },
+  });
   return res.json(post);
 }
 
