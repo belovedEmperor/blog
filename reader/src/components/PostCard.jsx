@@ -2,11 +2,13 @@ export default function PostCard({ post }) {
   return (
     <div>
       <a href={"/posts/" + post.id}>
-        <h3>{post.title}</h3>
+        <h2>{post.title}</h2>
       </a>
-      <a href={"/users/" + post.userId}>
-        <p>{post.author.username}</p>
-      </a>
+      <p>
+        <address>
+          <a href={"/users/" + post.userId}>{post.author.username}</a>
+        </address>
+      </p>
     </div>
   );
 }

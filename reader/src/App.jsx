@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import PostCard from "./components/PostCard";
+import { Outlet } from "react-router";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -12,15 +12,9 @@ function App() {
 
   console.log(posts);
 
-  const postCards = posts.map((post) => (
-    <li key={post.id}>
-      <PostCard post={post} />
-    </li>
-  ));
-
   return (
     <>
-      <ul>{postCards}</ul>
+      <Outlet context={{ posts, setPosts }} />
     </>
   );
 }
