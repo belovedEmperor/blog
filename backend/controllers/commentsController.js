@@ -11,6 +11,7 @@ async function isUserOwner(req, res) {
 export async function getAll(req, res) {
   const comments = await prisma.comment.findMany({
     where: { postId: Number(req.params.postId) },
+    include: { author: { select: { username: true } } },
   });
   return res.json(comments);
 }
@@ -18,6 +19,7 @@ export async function getAll(req, res) {
 export async function getOne(req, res) {
   const comment = await prisma.comment.findUnique({
     where: { id: Number(req.params.id), postId: Number(req.params.postId) },
+    include: { author: { select: { username: true } } },
   });
   return res.json(comment);
 }
