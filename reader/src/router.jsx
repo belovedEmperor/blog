@@ -1,5 +1,7 @@
 import App from "./App";
+import LoginForm from "./components/pages/LoginForm";
 import Post from "./components/pages/Post";
+import RegisterForm from "./components/pages/RegisterForm";
 import User from "./components/pages/User";
 import PostsList from "./components/PostsList";
 
@@ -20,6 +22,14 @@ const routes = [
       {
         path: "users/:id",
         element: <User />,
+      },
+      {
+        path: "register",
+        element: <RegisterForm />,
+      },
+      {
+        path: "login",
+        element: <LoginForm />,
       },
     ],
   },

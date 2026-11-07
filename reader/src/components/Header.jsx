@@ -6,6 +6,8 @@ export default function Header() {
       <nav>
         <a href="/">Home</a>
         {EDIT_URL && <a href={EDIT_URL}>Editor</a>}
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
       </nav>
     </div>
   );

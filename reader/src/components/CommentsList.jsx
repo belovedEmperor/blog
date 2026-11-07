@@ -5,7 +5,9 @@ export default function CommentsList({ postId }) {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    fetch(import.meta.env.VITE_API_URL + `posts/${postId}/comments`)
+    fetch(import.meta.env.VITE_API_URL + `posts/${postId}/comments`, {
+      credentials: "include",
+    })
       .then((response) => response.json())
       .then((data) => setComments(data));
   }, [postId]);

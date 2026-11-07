@@ -6,7 +6,7 @@ function App() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch(import.meta.env.VITE_API_URL + "posts")
+    fetch(import.meta.env.VITE_API_URL + "posts", { credentials: "include" })
       .then((response) => response.json())
       .then((data) => setPosts(data));
   }, []);

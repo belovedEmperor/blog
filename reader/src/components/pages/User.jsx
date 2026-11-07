@@ -7,10 +7,14 @@ export default function User() {
   const [UserPosts, setUserPosts] = useState();
 
   useEffect(() => {
-    fetch(import.meta.env.VITE_API_URL + `users/${id}`)
+    fetch(import.meta.env.VITE_API_URL + `users/${id}`, {
+      credentials: "include",
+    })
       .then((response) => response.json())
       .then((data) => setUser(data));
-    fetch(import.meta.env.VITE_API_URL + `users/${id}/posts`)
+    fetch(import.meta.env.VITE_API_URL + `users/${id}/posts`, {
+      credentials: "include",
+    })
       .then((response) => response.json())
       .then((data) => setUserPosts(data));
   }, [id]);
