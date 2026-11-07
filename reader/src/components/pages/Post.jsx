@@ -38,7 +38,7 @@ export default function Post() {
       </div>
       <div>
         <h2>Comments</h2>
-        <CommentsList postId={post.id} />
+        {post.id && <CommentsList postId={post.id} />}
       </div>
     </>
   );
