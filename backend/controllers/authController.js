@@ -28,14 +28,31 @@ export async function login(req, res) {
       jwt.sign(
         { id: user.id, role: user.role },
         process.env.SECRET_KEY,
-        { expiresIn: "1d" },
+        { expiresIn: "7d" },
         (err, token) => {
           if (err) return res.status(500).json({ error: err.message });
-          res.json({ token });
+          res
+            .cookie("token", token, {
+              httpOnly: true,
+              secure: true,
+              sameSite: "none",
+              maxAge: 7 * 24 * 60 * 60 * 1000, // ms
+            })
+            .json("Logged in");
         },
       );
     },
   )(req, res);
+}
+
+export async function logout(req, res) {
+  res
+    .clearCookie("token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    })
+    .json("Logged out");
 }
 
 export async function get(req, res) {
