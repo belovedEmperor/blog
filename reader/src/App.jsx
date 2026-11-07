@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router";
+import Header from "./components/Header";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -14,6 +15,7 @@ function App() {
 
   return (
     <>
+      <Header />
       <Outlet context={{ posts, setPosts }} />
     </>
   );
