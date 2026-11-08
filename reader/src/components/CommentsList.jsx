@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CommentCard from "./CommentCard";
 
-export default function CommentsList({ postId }) {
+export default function CommentsList({ postId, reload }) {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
@@ -10,7 +10,7 @@ export default function CommentsList({ postId }) {
     })
       .then((response) => response.json())
       .then((data) => setComments(data));
-  }, [postId]);
+  }, [postId, reload]);
 
   const commentCards = comments.map((comment) => (
     <li key={comment.id}>

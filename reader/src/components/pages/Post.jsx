@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import CommentsList from "../CommentsList";
+import CommentsContainer from "../CommentsContainer";
 
 export default function Post() {
   const { id } = useParams();
   const [post, setPost] = useState({});
-  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     fetch(import.meta.env.VITE_API_URL + `posts/${id}`, {
@@ -13,15 +12,7 @@ export default function Post() {
     })
       .then((response) => response.json())
       .then((data) => setPost(data));
-    fetch(import.meta.env.VITE_API_URL + `posts/${id}/comments`, {
-      credentials: "include",
-    })
-      .then((response) => response.json())
-      .then((data) => setComments(data));
   }, [id]);
-
-  console.log(post);
-  console.log(comments);
 
   return (
     <>
@@ -43,7 +34,7 @@ export default function Post() {
       </div>
       <div>
         <h2>Comments</h2>
-        {post.id && <CommentsList postId={post.id} />}
+        <CommentsContainer postId={post.id} />
       </div>
     </>
   );
