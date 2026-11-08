@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import PostCard from "../PostCard";
 
 export default function User() {
   const { id } = useParams();
@@ -20,10 +21,8 @@ export default function User() {
   }, [id]);
 
   const posts = UserPosts?.map((post) => (
-    <li>
-      <a href={"/posts/" + post.id}>
-        <h2>{post.title}</h2>
-      </a>
+    <li key={post.id}>
+      <PostCard post={post} />
     </li>
   ));
 
