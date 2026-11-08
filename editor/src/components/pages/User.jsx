@@ -1,24 +1,29 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { use, useEffect, useState } from "react";
 import PostCard from "../PostCard";
+import UserContext from "../../context/UserContext";
 
 export default function User() {
-  const { id } = useParams();
+  const { user } = use(UserContext);
+
   const [User, setUser] = useState();
   const [UserPosts, setUserPosts] = useState();
 
   useEffect(() => {
-    fetch(import.meta.env.VITE_API_URL + `users/${id}`, {
+    if (!user) return;
+
+    fetch(import.meta.env.VITE_API_URL + `users/${user?.id}`, {
       credentials: "include",
     })
       .then((response) => response.json())
       .then((data) => setUser(data));
-    fetch(import.meta.env.VITE_API_URL + `users/${id}/posts`, {
+    fetch(import.meta.env.VITE_API_URL + `users/${user?.id}/posts`, {
       credentials: "include",
     })
       .then((response) => response.json())
       .then((data) => setUserPosts(data));
-  }, [id]);
+  }, [user]);
+
+  if (!user) return <p>Please log in</p>;
 
   const posts = UserPosts?.map((post) => (
     <li key={post.id}>
