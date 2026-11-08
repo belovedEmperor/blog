@@ -5,7 +5,7 @@ export default function PostCard({ post }) {
         <h2>{post.title}</h2>
       </a>
       <address>
-        <a href={"/users/" + post.userId}>{post.author.username}</a>
+        <a href={"/users/" + post.userId}>{post.author?.username}</a>
       </address>
     </div>
   );
