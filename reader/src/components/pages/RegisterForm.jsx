@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import { useNavigate } from "react-router";
+import UserContext from "../../context/UserContext";
 
 export default function RegisterForm() {
+  const { user } = use(UserContext);
   const navigate = useNavigate();
   const [errors, setErrors] = useState();
+
+  if (user !== undefined) navigate("/");
 
   async function onSubmit(event) {
     event.preventDefault();
