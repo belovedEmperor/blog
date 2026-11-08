@@ -6,7 +6,7 @@ export default function Header() {
   const { user } = use(UserContext);
   const navigate = useNavigate();
 
-  const EDIT_URL = import.meta.env.VITE_EDIT_URL;
+  const EDITOR_URL = import.meta.env.VITE_EDITOR_URL;
 
   async function onSubmit(event) {
     event.preventDefault();
@@ -23,7 +23,7 @@ export default function Header() {
     <div id="header">
       <nav>
         <a href="/">Home</a>
-        {EDIT_URL && <a href={EDIT_URL}>Editor</a>}
+        {EDITOR_URL && <a href={EDITOR_URL}>Editor</a>}
         {user ? (
           <form onSubmit={onSubmit}>
             <button type="submit">Logout</button>
