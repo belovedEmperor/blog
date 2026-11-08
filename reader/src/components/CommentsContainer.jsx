@@ -3,7 +3,7 @@ import CommentForm from "./CommentForm";
 import { useState } from "react";
 
 export default function CommentsContainer({ postId }) {
-  const [reload, setReload] = useState();
+  const [reload, setReload] = useState(0);
 
   return (
     <div>
