@@ -31,7 +31,7 @@ export async function getOne(req, res) {
 }
 
 export async function create(req, res) {
-  await prisma.post.create({
+  const post = await prisma.post.create({
     data: {
       title: req.body.title,
       body: req.body.body,
@@ -39,7 +39,7 @@ export async function create(req, res) {
       isPublished: req.body.isPublished ?? false,
     },
   });
-  res.json("Post created");
+  res.json(post);
 }
 
 export async function update(req, res) {
