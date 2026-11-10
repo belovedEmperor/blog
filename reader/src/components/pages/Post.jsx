@@ -19,7 +19,7 @@ export default function Post() {
       <div>
         <h1>
           {post.title}
-          {post.isPublished === false && " (Unpublished)"}
+          {post.isPublished === false && " (Not published)"}
         </h1>
         <address>
           Written by:&nbsp;

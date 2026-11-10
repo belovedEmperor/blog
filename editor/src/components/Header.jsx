@@ -25,9 +25,12 @@ export default function Header() {
         <a href="/">Home</a>
         {READER_URL && <a href={READER_URL}>Reader</a>}
         {user ? (
-          <form onSubmit={onSubmit}>
-            <button type="submit">Logout</button>
-          </form>
+          <>
+            <a href="/posts/new">New</a>
+            <form onSubmit={onSubmit}>
+              <button type="submit">Logout</button>
+            </form>
+          </>
         ) : (
           <>
             <a href="/login">Login</a>
