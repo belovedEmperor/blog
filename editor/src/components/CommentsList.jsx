@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CommentCard from "./CommentCard";
 
-export default function CommentsList({ postId, reload }) {
+export default function CommentsList({ postId, reload, setReload }) {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export default function CommentsList({ postId, reload }) {
 
   const commentCards = comments.map((comment) => (
     <li key={comment.id}>
-      <CommentCard comment={comment} />
+      <CommentCard comment={comment} reload={reload} setReload={setReload} />
     </li>
   ));
 
